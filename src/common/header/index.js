@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { CSSTransition } from "react-transition-group";
+import {actionCreators} from './store'
 import {
   HeaderWrapper,
   Logo,
@@ -55,19 +56,14 @@ const mapStateToProps = state => {
   };
 };
 
+// 处理逻辑
 const mapDispathToProps = dispath => {
   return {
     handleInputFocus() {
-      const action = {
-        type: "seatch_focus"
-      };
-      dispath(action);
+      dispath(actionCreators.searchFocus());
     },
     handleInputBlur() {
-      const action = {
-        type: "search_blue"
-      };
-      dispath(action);
+      dispath(actionCreators.searchBlur());
     }
   };
 };

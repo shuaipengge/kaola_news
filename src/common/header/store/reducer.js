@@ -1,14 +1,16 @@
+import * as constatns from "./constants";
+
 const defaultState = {
     focused: false
   };
   
   export default (state = defaultState, action) => {
-    if (action.type === 'seatch_focus') {
+    if (action.type === constatns.SEARCH_FOCUS) {
       return {
         focused: true
       }
     }
-    if (action.type === 'search_blue') {
+    if (action.type === constatns.SEARCH_BLUR) {
       return {
         focused: false
       }
