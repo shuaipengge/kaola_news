@@ -51,7 +51,7 @@ const Header = props => {
 // state 代表store里的所有数据
 const mapStateToProps = state => {
   return {
-    focused: state.focused
+    focused: state.header.focused
   };
 };
 
