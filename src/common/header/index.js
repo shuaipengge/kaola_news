@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { CSSTransition } from "react-transition-group";
-import {actionCreators} from './store'
+import { actionCreators } from "./store";
 import {
   HeaderWrapper,
   Logo,
@@ -52,7 +52,8 @@ const Header = props => {
 // state 代表store里的所有数据
 const mapStateToProps = state => {
   return {
-    focused: state.header.get('focused')
+    focused: state.getIn(["header", "focused"])
+    // state.get('header').get('focused')
   };
 };
 
