@@ -3,7 +3,8 @@ import { fromJS } from "immutable";
 // immutable库
 
 const defaultState = fromJS({
-  focused: false
+  focused: false,
+  list: []
 });
 
 export default (state = defaultState, action) => {
@@ -13,6 +14,9 @@ export default (state = defaultState, action) => {
   }
   if (action.type === constatns.SEARCH_BLUR) {
     return state.set("focused", false);
+  }
+  if (action.type === constatns.CHANGE_LIST) {
+    return state.set("list", action.data)
   }
   return state;
 };
