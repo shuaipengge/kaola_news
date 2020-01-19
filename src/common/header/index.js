@@ -20,19 +20,40 @@ import {
 
 class Header extends Component {
   getListArea() {
-    const { list } = this.props;
-    if (this.props.focused) {
+    const {
+      focused,
+      list,
+      page,
+      totalPage,
+      mouseIn,
+      handleMouseEnter,
+      handleMouseLeave,
+      handleChangePage
+    } = this.props;
+    const newList = list.toJS();
+    const pageList = [];
+
+    if (newList.length) {
+      for (let i = (page - 1) * 10; i < page * 10; i++) {
+        pageList.push(
+          <SearchInfoItem key={newList[i]}>{newList[i]}</SearchInfoItem>
+        );
+      }
+    }
+
+    if (focused || mouseIn) {
       return (
-        <SearchInfo>
+        <SearchInfo
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <SearchInfoTitle>
             热门搜索
-            <SearchInfoSwitch>换一批</SearchInfoSwitch>
+            <SearchInfoSwitch onClick={() => handleChangePage(page, totalPage)}>
+              换一批
+            </SearchInfoSwitch>
           </SearchInfoTitle>
-          <SearchInfoList>
-            {list.map(item => {
-              return <SearchInfoItem key={item}>{item}</SearchInfoItem>;
-            })}
-          </SearchInfoList>
+          <SearchInfoList>{pageList}</SearchInfoList>
         </SearchInfo>
       );
     } else {
@@ -41,7 +62,7 @@ class Header extends Component {
   }
 
   render() {
-    const {focused,handleInputFocus,handleInputBlur} = this.props
+    const { focused, handleInputFocus, handleInputBlur } = this.props;
     return (
       <HeaderWrapper>
         <Logo />
@@ -53,20 +74,14 @@ class Header extends Component {
             <span className="iconfont">&#xe601;</span>
           </NavItem>
           <SearchWrapper>
-            <CSSTransition
-              in={focused}
-              timeout={200}
-              classNames="slide"
-            >
+            <CSSTransition in={focused} timeout={200} classNames="slide">
               <NavSearch
                 className={focused ? "focused" : ""}
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
               ></NavSearch>
             </CSSTransition>
-            <span
-              className={focused ? "focused iconfont" : "iconfont"}
-            >
+            <span className={focused ? "focused iconfont" : "iconfont"}>
               &#xe60d;
             </span>
             {this.getListArea()}
@@ -88,7 +103,10 @@ class Header extends Component {
 const mapStateToProps = state => {
   return {
     focused: state.getIn(["header", "focused"]),
-    list: state.getIn(["header", "list"])
+    list: state.getIn(["header", "list"]),
+    page: state.getIn(["header", "page"]),
+    totalPage: state.getIn(["header", "totalPage"]),
+    mouseIn: state.getIn(["header", "mouseIn"])
     // state.get('header').get('focused')
   };
 };
@@ -102,6 +120,19 @@ const mapDispathToProps = dispath => {
     },
     handleInputBlur() {
       dispath(actionCreators.searchBlur());
+    },
+    handleMouseEnter() {
+      dispath(actionCreators.mouseEnter());
+    },
+    handleMouseLeave() {
+      dispath(actionCreators.mouseLeave());
+    },
+    handleChangePage(page, totalPage) {
+      if (page < totalPage) {
+        dispath(actionCreators.changePage(page + 1));
+      } else {
+        dispath(actionCreators.changePage(1));
+      }
     }
   };
 };

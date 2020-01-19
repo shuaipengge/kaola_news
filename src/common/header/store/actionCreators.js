@@ -10,9 +10,23 @@ export const searchBlur = () => ({
   type: constatns.SEARCH_BLUR
 });
 
+export const mouseEnter = () => ({
+  type: constatns.MOUSE_ENTER
+});
+
+export const mouseLeave = () => ({
+  type: constatns.MOUSE_LEAVE
+});
+
+export const changePage = (page) => ({
+  type: constatns.CHANGE_PAGE,
+  page
+})
+
 const changeList = data => ({
   type: constatns.CHANGE_LIST,
-  data: fromJS(data)
+  data: fromJS(data),
+  totalPage: Math.ceil(data.length / 10)
 });
 
 export const getList = () => {
