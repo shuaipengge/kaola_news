@@ -13,13 +13,15 @@ class Home extends Component {
           <img
             className="banner-img"
             src="https://koala.net/images/learn/xexchange_students.jpg.pagespeed.ic.h8gl-632qj.webp"
+            alt="images"
           />
           <Topic></Topic>
           <List></List>
+        </HomeLeft>
+        <HomeRight>
           <Recommend></Recommend>
           <Writer></Writer>
-        </HomeLeft>
-        <HomeRight>right</HomeRight>
+        </HomeRight>
       </HomeWrapper>
     );
   }
