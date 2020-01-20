@@ -1,10 +1,12 @@
 import React, { Fragment } from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route } from "react-router-dom";
 import store from "./store";
 import { GlobalStyled } from "./style.js";
 import { Globalicon } from "./statics/iconfont/iconfont.js";
 import Header from "./common/header";
+import Home from "./pages/home";
+import Detail from "./pages/detail";
 
 function App() {
   return (
@@ -15,8 +17,8 @@ function App() {
         {/* Provider下所有的组件都可以使用store */}
         <Header />
         <BrowserRouter>
-          <Route path='/' exact render={() => <div>home</div>}></Route>
-          <Route path='/detail' exact render={() => <div>detail</div>}></Route>
+          <Route path="/" exact component={Home}></Route>
+          <Route path="/detail" exact component={Detail}></Route>
         </BrowserRouter>
       </Provider>
     </Fragment>
