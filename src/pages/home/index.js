@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import Topic from "./Components/Topic";
 import List from "./Components/List";
@@ -7,7 +7,8 @@ import Writer from "./Components/Writer";
 import { HomeWrapper, HomeLeft, HomeRight, BackTop } from "./style";
 import { actionCreators } from "./store";
 
-class Home extends Component {
+class Home extends PureComponent {
+
   handleScrellTop() {
     window.scrollTo(0, 0);
   }
