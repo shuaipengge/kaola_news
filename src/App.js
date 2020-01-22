@@ -15,8 +15,8 @@ function App() {
       <Globalicon />
       <Provider store={store}>
         {/* Provider下所有的组件都可以使用store */}
-        <Header />
         <BrowserRouter>
+          <Header />
           <Route path="/" exact component={Home}></Route>
           <Route path="/detail" exact component={Detail}></Route>
         </BrowserRouter>
